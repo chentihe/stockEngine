@@ -5,7 +5,7 @@ import json
 import concurrent.futures
 from fake_useragent import UserAgent
 
-stock_list = pd.read_csv('/Users/CHENTHE/Desktop/stockEngine/stock_list.csv')
+stock_list = pd.read_csv('/Users/chenti-he/Desktop/stockEngine/stock_list.csv')
 historical_data = []
 
 id_date = []
@@ -66,4 +66,4 @@ def get_data(id_date):
 with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
     executor.map(get_data, id_date)
 historical_data = pd.DataFrame(historical_data)
-historical_data.to_csv('/Users/CHENTHE/Desktop/stockEngine/historical_data.csv')
+historical_data.to_csv('/Users/chenti-he/Desktop/stockEngine/historical_data.csv')

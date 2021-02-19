@@ -37,10 +37,10 @@ class Anue(Website):
                 title = new['title']
 
                 # 新聞詳細內容連結 id
-                link = 'https://news.cnyes.com/news/id/' + new['newsId']
+                link = 'https://news.cnyes.com/news/id/' + str(new['newsId'])
 
                 # 新聞發布日期
-                time_stamp = new['publishedAt']
+                time_stamp = new['publishAt']
                 struct_time = time.localtime(time_stamp)
                 published_at = time.strftime('%Y-%m-%d', struct_time)
 

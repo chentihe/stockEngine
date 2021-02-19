@@ -5,5 +5,5 @@ from users.api.serializers import UserDisplaySerializer
 class CurrentUserAPIView(APIView):
 
     def get(self, request):
-        serializer = UserDisplaySerializer
+        serializer = UserDisplaySerializer(request.user)
         return Response(serializer.data)
