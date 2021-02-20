@@ -1,11 +1,11 @@
 <template>
-            <tr>
-                <td>
-                    <a :href="news.link">{{ news.title }}</a>
-                </td>
-                <td>{{ news.published_at }}</td>
-                <td><img :src="news.source" style="width:32px; heigh:32px;" /></td>
-            </tr>
+    <tr>
+        <td>
+            <a :href="news.link">{{ news.title }}</a>
+        </td>
+        <td>{{ news.published_at }}</td>
+        <td><img :src="news.source" style="width:32px; heigh:32px;" /></td>
+    </tr>
 </template>
 
 <script>
