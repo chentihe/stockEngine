@@ -26,7 +26,7 @@ SECRET_KEY = 'deh(hcb+(dto&r7-j^34+1f7qj0k@xjwjd4ko_rv-n7ie2&2+6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -144,10 +144,10 @@ LOGOUT_REDIRECT_URL = '/'
 STATIC_URL = '/static/'
 
 # 前端做好再加回來
-# STATICFILES_DIR = [
-#     os.path.join(BASE_DIR, 'assets'),
-#     os.path.join(BASE_DIR, 'frontend/dist'),
-# ]
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, 'assets'),
+    os.path.join(BASE_DIR, 'frontend/dist'),
+]
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.CustomUser'
