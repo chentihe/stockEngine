@@ -1,3 +1,3 @@
-import pymysql
+import PyMySQL
 
-pymysql.install_as_MySQLdb()
+PyMySQL.install_as_MySQLdb()

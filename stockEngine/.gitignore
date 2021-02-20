@@ -26,3 +26,4 @@ Include
 Lib
 Scripts
 tcl
+db.sqlite3
