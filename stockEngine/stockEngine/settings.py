@@ -15,6 +15,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 
 # Quick-start development settings - unsuitable for production
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'stockEngine.urls'
@@ -91,17 +93,17 @@ WSGI_APPLICATION = 'stockEngine.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'it60nq0hk0hqw0pm',
-        'USER': 'rcpvfy6xkgmt8g1t',
-        'PASSWORD': 'evgmitti3i09zsrw',
-        'HOST': 'd6rii63wp64rsfb5.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'NAME': '******',
+        'USER': '******',
+        'PASSWORD': '******',
+        'HOST': '******',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -142,13 +144,12 @@ LOGOUT_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
+STATIC_URL = '/frontend/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'frontend')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 # 前端做好再加回來
 STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'assets'),
-    os.path.join(BASE_DIR, 'frontend/dist'),
+    os.path.join(BASE_DIR, 'frontend'),
 ]
 
 # Custom User Model
