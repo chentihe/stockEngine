@@ -1,24 +1,8 @@
 <template>
-  <div class="home container">
+  <div class="stocknews container">
     <div class="my-4">
-      <div class="form text-center">
-        <form @submit.prevent="onSubmit">
-          <label class="form-label"><strong>Search for Stock Info</strong></label>
-          <div class="input-group mb-3">
-            <input 
-                v-model="stockNo" 
-                class="form-control"
-                placeholder="Type The Stock No">
-            <button type="submit" 
-                    class="btn btn-sm btn-outline-secondary"
-                    >Submit
-            </button>
-          </div>
-        </form>
-      </div>
     <div class="btn-group" 
-        role="group"
-        v-if="isShow">
+        role="group">
       <button type="button" 
               class="btn btn-warning">
         <strong>
@@ -42,7 +26,6 @@
     </div>
     <div 
       class="news text-center mt-1"
-      v-if="isShow"
       >
       <NewsComponent
         :newsList="newses"
@@ -58,11 +41,7 @@
         />
       </div>
     </div>
-    <div v-else>
-      <p v-if="error" class="error mt-2"> {{ error }} </p>
     </div>
-    </div>
-
   </div>
 </template>
 
@@ -73,32 +52,31 @@ import NewsComponent from "@/components/News.vue";
 import Pagination from "@/components/Pagination.vue";
 
 export default {
-  name: "Home",
+  name: "StockNews",
   components:{
     NewsComponent,
     Pagination
   },
+  props: {
+    stockNo: {
+      type: String,
+      required: true
+    }
+  },
   data() {
       return {
-        stockNo: null,
-        newsUrl: null,
         stockData: {},
         getStock: [],
-        error: null,
-        isShow: false,
-        getNews: false,
-        addWL: false,
-        loadingNews: false,
         newses: [],
-        pagination: {}
+        addWL: false,
+        pagination: {},
+        getNews: false,
       }
   },
   methods: {
     // 接收該股相關的新聞
     sendNewsReq(page = 1) {
-      let endpoint = this.newsUrl + `?page=${page}`;
-      console.log(endpoint)
-      this.loadingNews = true;
+      let endpoint = `/api/news/${this.stockNo}/?page=${page}`;
       apiService(endpoint)
         .then(data => {
           if (data.results.length > 0) {
@@ -113,14 +91,10 @@ export default {
     },
     // 接收該股的股票代號與公司名稱
     sendStockReq() {
-      let endpoint = this.stockAPI;
+      let endpoint = `/api/stock/${this.stockNo}/`;
         apiService(endpoint)
             .then(data => {
-              if (data) {
-                this.stockData = data
-              } else {
-                this.stockData = []
-              }
+              this.stockData = data
             });
     },
     // 加入觀察清單按鈕
@@ -132,19 +106,19 @@ export default {
     // 加入該股到觀察清單
     addtoWL() {
       let endpoint = `api/watchlist/`;
-        apiService(endpoint, "POST", { stock_no: this.stockData.stock_no })
+        apiService(endpoint, "POST", { stock_no: this.stockNo })
       this.addWL = true;
     },
     // 從觀察清單移除該股
     rmfromWL() {
-      let endpoint = '/api/watchlist/' + this.stockData.stock_no + '/';
+      let endpoint = `/api/watchlist/${this.stockData.stock_no}/`;
         apiService(endpoint, "DELETE")
       this.addWL = false;
     },
     // 檢查該股是否有在觀察清單中
     searchStock() {
       this.addWL = false;
-      let endpoint = this.getStockAPI;
+      let endpoint = `/api/watchlist/?search=${this.stockNo}`
       apiService(endpoint)
         .then(data => {
           if (data.results.length > 0) {
@@ -155,35 +129,13 @@ export default {
           };
         })
       },
-    onSubmit() {
-      if (this.stockNo) {
-        this.newses = [];
-        this.newsUrl = this.newsAPI;
-        this.sendStockReq();
-        this.sendNewsReq();
-        this.searchStock();
-        this.stockNo = "";
-        this.isShow = true;
-      } else {
-        this.isShow = false;
-        this.error = "Please enter a stock no!"
-      }
-    }
-  },
-  computed: {
-    stockAPI: function() {
-      return `/api/stock/${this.stockNo}/`
-    },
-    newsAPI: function() {
-      return `/api/news/${this.stockNo}/`
-    },
-    getStockAPI: function() {
-      return `/api/watchlist/?search=${this.stockNo}`
-    }
   },
   created() {
-    document.title = "Stock Engine"
-  }
+    document.title = "Stock News"
+    this.sendStockReq()
+    this.sendNewsReq()
+    this.searchStock()
+  },
 };
 </script>
 

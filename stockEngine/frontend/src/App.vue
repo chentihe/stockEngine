@@ -17,8 +17,10 @@ export default {
   methods: {
       async setUserInfo() {
       const data = await apiService("/api/user/");
+      const requestUserID = data["id"]
       const requestUser = data["username"];
-      window.localStorage.setItem("username", requestUser);
+      window.localStorage.setItem("userid", requestUserID);
+      window.localStorage.setItem("username", requestUser); 
       }
   },
   created() {
@@ -31,6 +33,7 @@ export default {
     html, body {
         height: 100%;
         font-family: 'Noto Sans TC', sans-serif;
+        color: dimgrey;
     }
 
     .btn:focus {

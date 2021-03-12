@@ -47,7 +47,13 @@ urlpatterns = [
          include('rest_auth.registration.urls')),
 
     path('api/',
-    include('scrapers.urls')),
+    include('stockEngine.api.stocknews.urls')),
+
+    path('api/',
+    include('stockEngine.api.watchlist.urls')),
+
+    path('api/',
+    include('stockEngine.api.stocklist.urls')),
 
     re_path(r'^.*$', IndexTemplateView.as_view(), name='entry-point'),
 ]

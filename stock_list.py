@@ -21,4 +21,4 @@ stock_name.pop(0) # 將抬頭移除
 stock_list = {'stock_no': stock_no,
             'stock_name': stock_name}
 stock_list = pd.DataFrame(stock_list)
-stock_list.to_csv('/Users/CHENTHE/Desktop' + '/stock_list.csv')
+stock_list.to_csv('/Users/chenti-he/PycharmProjects/stockEngine' + '/stock_list.csv')

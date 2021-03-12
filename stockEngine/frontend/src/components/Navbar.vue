@@ -6,7 +6,6 @@
         class="navbar-brand"
         >stockEngine
       </router-link>
-
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
@@ -14,6 +13,13 @@
                   :to="{ name: 'Home' }"
                   class="btn btn-sm btn-success"
               >Home
+            </router-link>
+          </li>
+          <li class="nav-item">
+            <router-link
+                  :to="{ name: 'WatchList' }"
+                  class="btn btn-sm btn-danger"
+              >WatchList
             </router-link>
           </li>
           <li class="nav-item">
@@ -34,15 +40,14 @@ export default {
 </script>
 
 <style>
-    .my-navbar {
-        border-bottom: 1px solid #DDD;
-    }
-
-    .navbar-brand {
-        font-weight: bold;
-        font-size: 130%;
-    }
-    .navbar-brand:hover {
-        color: #C0C0C0 !important;
-    }
+  .my-navbar {
+      border-bottom: 1px solid #DDD;
+  }
+  .navbar-brand {
+      font-weight: bold;
+      font-size: 130%;
+  }
+  .navbar-brand:hover {
+      color: #C0C0C0 !important;
+  }
 </style>

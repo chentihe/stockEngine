@@ -23,6 +23,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'deh(hcb+(dto&r7-j^34+1f7qj0k@xjwjd4ko_rv-n7ie2&2+6'
+# 完成再打開
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'webpack_loader',
 
     'users',
+    'stockEngine',
 ]
 
 MIDDLEWARE = [
@@ -69,7 +71,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'stockEngine.urls'
+ROOT_URLCONF = 'stockEngine_project.urls'
 
 TEMPLATES = [
     {
@@ -87,7 +89,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'stockEngine.wsgi.application'
+WSGI_APPLICATION = 'stockEngine_project.wsgi.application'
 
 
 # Database
@@ -97,11 +99,12 @@ WSGI_APPLICATION = 'stockEngine.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': '******',
-        'USER': '******',
-        'PASSWORD': '******',
-        'HOST': '******',
+        'NAME': 'it60nq0hk0hqw0pm',
+        'USER': 'rcpvfy6xkgmt8g1t',
+        'PASSWORD': 'evgmitti3i09zsrw',
+        'HOST': 'd6rii63wp64rsfb5.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
+        'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
 
@@ -144,13 +147,19 @@ LOGOUT_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+# 前端做好用這個
 STATIC_URL = '/frontend/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'frontend')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-# 前端做好再加回來
 STATICFILES_DIR = [
     os.path.join(BASE_DIR, 'frontend'),
 ]
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "assets"),
+#     os.path.join(BASE_DIR, "frontend/dist"),
+# ]
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -169,13 +178,14 @@ ACCOUNT_EMAIL_REQUIRED = (True)
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES' : (
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
+        'rest_framework.authentication.SessionAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated'
+        'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'DEFAULT_PAGINATION_CLASS': (
+        'stockEngine_project.pagination.CustomPagination',
+    )
 }
 
 # 前端寫好再加入
