@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'deh(hcb+(dto&r7-j^34+1f7qj0k@xjwjd4ko_rv-n7ie2&2+6'
 # 完成再打開
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
 
     'crispy_forms',
-    'webpack_loader',
+    # 'webpack_loader',
 
     'users',
     'stockEngine',
@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'stockEngine_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'it60nq0hk0hqw0pm',
-        'USER': 'rcpvfy6xkgmt8g1t',
-        'PASSWORD': 'evgmitti3i09zsrw',
-        'HOST': 'd6rii63wp64rsfb5.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'NAME': 'sx2bmfhyr5cgo1ms',
+        'USER': 'gsz2p9yh7hjao4du',
+        'PASSWORD': 'g7h0v5hgyermclnp',
+        'HOST': 'pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
@@ -148,18 +148,18 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 # 前端做好用這個
-STATIC_URL = '/frontend/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'frontend')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-STATICFILES_DIR = [
-    os.path.join(BASE_DIR, 'frontend'),
-]
+# STATIC_URL = '/frontend/dist/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/dist/')
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "assets"),
-#     os.path.join(BASE_DIR, "frontend/dist"),
+# STATICFILES_DIR = [
+#     os.path.join(BASE_DIR, 'frontend/'),
 # ]
+
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "frontend/dist"),
+]
 
 # Custom User Model
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -183,15 +183,28 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_PAGINATION_CLASS': (
-        'stockEngine_project.pagination.CustomPagination',
-    )
+    'DEFAULT_PAGINATION_CLASS': 'stockEngine_project.pagination.CustomPagination'
 }
 
-# 前端寫好再加入
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
-    }
+# WEBPACK_LOADER = {
+#     'DEFAULT': {
+#         'BUNDLE_DIR_NAME': 'dist/',
+#         'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json'),
+#     }
+# }
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+             'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+    },
 }

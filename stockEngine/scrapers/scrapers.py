@@ -68,11 +68,11 @@ class Anue(Website):
     def post_to_mysql(self, stocks):
 
         db_settings = {
-            'host': '127.0.0.1',
+            'host': 'pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
             'port': 3306,
-            'user': 'root',
-            'password': '123456',
-            'db': 'stock_engine',
+            'user': 'gsz2p9yh7hjao4du',
+            'password': 'g7h0v5hgyermclnp',
+            'db': 'sx2bmfhyr5cgo1ms',
             'charset': 'utf8'
         }
 
@@ -99,11 +99,11 @@ class Anue(Website):
         conn.close()
 
 db_settings = {
-    'host': '127.0.0.1',
+    'host': 'pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
     'port': 3306,
-    'user': 'root',
-    'password': '123456',
-    'db': 'stock_engine',
+    'user': 'gsz2p9yh7hjao4du',
+    'password': 'g7h0v5hgyermclnp',
+    'db': 'sx2bmfhyr5cgo1ms',
     'charset': 'utf8'
 }
 

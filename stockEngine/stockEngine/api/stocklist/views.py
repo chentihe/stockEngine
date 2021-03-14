@@ -1,4 +1,3 @@
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 
@@ -11,7 +10,3 @@ class StockListView(generics.RetrieveAPIView):
     queryset = StockList.objects.all()
     lookup_field = 'stock_no'
     lookup_url_kwarg = 'stock_no'
-
-    def get_queryset(self):
-        kwargs = self.kwargs.get('stock_no')
-        return StockList.objects.filter(stock_no=kwargs)

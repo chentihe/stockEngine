@@ -96,7 +96,7 @@ export default {
   methods: {
     // 接收該股相關的新聞
     sendNewsReq(page = 1) {
-      let endpoint = this.newsUrl + `?page=${page}`;
+      let endpoint = `${this.newsUrl}?page=${page}`;
       console.log(endpoint)
       this.loadingNews = true;
       apiService(endpoint)
@@ -114,6 +114,7 @@ export default {
     // 接收該股的股票代號與公司名稱
     sendStockReq() {
       let endpoint = this.stockAPI;
+      console.log(endpoint);
         apiService(endpoint)
             .then(data => {
               if (data) {
@@ -132,24 +133,25 @@ export default {
     // 加入該股到觀察清單
     addtoWL() {
       let endpoint = `api/watchlist/`;
-        apiService(endpoint, "POST", { stock_no: this.stockData.stock_no })
+        apiService(endpoint, "POST", { stock_no: this.stockData.stock_no });
       this.addWL = true;
     },
     // 從觀察清單移除該股
     rmfromWL() {
-      let endpoint = '/api/watchlist/' + this.stockData.stock_no + '/';
-        apiService(endpoint, "DELETE")
+      let endpoint = `/api/watchlist/${this.stockData.stock_no}/`;
+        apiService(endpoint, "DELETE");
       this.addWL = false;
     },
     // 檢查該股是否有在觀察清單中
     searchStock() {
       this.addWL = false;
       let endpoint = this.getStockAPI;
+      console.log(endpoint);
       apiService(endpoint)
         .then(data => {
           if (data.results.length > 0) {
-            this.getStock = data.results[0]
-            this.addWL = true
+            this.getStock = data.results[0];
+            this.addWL = true;
           } else {
             this.getStock = []
           };
