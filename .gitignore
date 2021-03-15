@@ -1,5 +1,7 @@
 .DS_Store
 stockEngine/frontend/node_modules
+stockEngine/frontend/dist
+stockEngine/frontend/webpack-stats.json
 
 # local env files
 .env.local

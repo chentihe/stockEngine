@@ -7,7 +7,7 @@ from stockEngine.api.stocknews.serializers import StockNewsSerializer
 
 class StockNewsDetailView(generics.ListAPIView):
     serializer_class = StockNewsSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated]
     lookup_field = 'stock_no'
     lookup_url_kwarg = 'stock_no'
 

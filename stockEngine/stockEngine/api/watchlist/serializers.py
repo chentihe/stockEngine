@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from stockEngine.api.stocklist.serializers import StockListSerializer
 from stockEngine.api.watchlist.models import WatchList
 
 class WatchListSerializer(serializers.ModelSerializer):

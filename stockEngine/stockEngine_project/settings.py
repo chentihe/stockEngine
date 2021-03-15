@@ -23,14 +23,13 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'deh(hcb+(dto&r7-j^34+1f7qj0k@xjwjd4ko_rv-n7ie2&2+6'
-# 完成再打開
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# https://
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -54,6 +53,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
 
     'crispy_forms',
+    # 部署後可以拿掉
     # 'webpack_loader',
 
     'users',
@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'stockEngine_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sx2bmfhyr5cgo1ms',
-        'USER': 'gsz2p9yh7hjao4du',
-        'PASSWORD': 'g7h0v5hgyermclnp',
-        'HOST': 'pxukqohrckdfo4ty.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'NAME': 'your database',
+        'USER': 'your user',
+        'PASSWORD': 'your password',
+        'HOST': 'your host',
         'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
@@ -126,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -147,14 +146,7 @@ LOGOUT_REDIRECT_URL = '/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-# 前端做好用這個
-# STATIC_URL = '/frontend/dist/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'frontend/dist/')
-
-# STATICFILES_DIR = [
-#     os.path.join(BASE_DIR, 'frontend/'),
-# ]
-
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 STATICFILES_DIRS = [
@@ -176,16 +168,17 @@ ACCOUNT_EMAIL_REQUIRED = (True)
 
 # Django-REST-Framework (全域認證&授權)
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES' : (
+    'DEFAULT_AUTHENTICATION_CLASSES' : [
         'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ),
+    ],
     'DEFAULT_PAGINATION_CLASS': 'stockEngine_project.pagination.CustomPagination'
 }
 
+# disable while deployment
 # WEBPACK_LOADER = {
 #     'DEFAULT': {
 #         'BUNDLE_DIR_NAME': 'dist/',
@@ -193,6 +186,7 @@ REST_FRAMEWORK = {
 #     }
 # }
 
+# 如果報錯開heroku logs --tail 除錯
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

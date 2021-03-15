@@ -7,7 +7,7 @@ from stockEngine.api.watchlist.serializers import WatchListSerializer
 
 class WatchListView(viewsets.ModelViewSet):
     serializer_class = WatchListSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = [IsAuthenticated]
     lookup_field = 'stock_no'
     filter_backends = (filters.SearchFilter,)
     search_fields = ('stock_no__stock_no', 'stock_no__stock_name')
